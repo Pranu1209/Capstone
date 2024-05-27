@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Successful</title>
+  <script>
+    // JavaScript for countdown (replace with your preferred library)
+    function redirectToLogin() {
+      window.location.href = "/login"; // Update with your login URL
+    }
+    setTimeout(redirectToLogin, 5000); // Redirect after 5 seconds (5000 milliseconds)
+  </script>
+</head>
+<body>
+  <h1 class="text-center mt-5">Effort Estimation Tool</h1><br><br>
+  <h1>Registration Successful!</h1>
+  <p>You have been registered successfully. You will be redirected to the login page in <span id="countdown">5</span> seconds.</p>
+  <script>
+    // Update countdown timer (optional)
+    var countdown = document.getElementById("countdown");
+    var seconds = 5;
+    setInterval(function() {
+      countdown.textContent = seconds;
+      seconds--;
+    }, 1000); // Update every second
+  </script>
+</body>
+</html>

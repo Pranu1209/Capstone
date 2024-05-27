@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historical Data Records</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mt-5">Effort Estimation Tool</h1><br><br>
+        <h1>Historical Data Records</h1>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary mb-3">HOME</a> <a href="{{ url_for('create_historical_data') }}" class="btn btn-primary mb-3">Add New Record</a> 
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Task ID</th>
+                    <th>Task Name</th>
+                    <th>Complexity</th>
+                    <th>Size</th>
+                    <th>Task Type</th>
+                    <th>Estimated Effort Hours</th>
+                    <th>Confidence Level</th>
+                    <th>Estimated Range Hours</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in historical_data %}
+                <tr data-task-id="{{ record.task_id }}">
+                    <td>{{ record.task_id }}</td>
+                    <td><input type="text" class="form-control task-name" value="{{ record.task_name }}" disabled></td>
+                    <td>
+                        <select class="form-control complexity" disabled>
+                            <option value="Low" {% if record.complexity == 'Low' %}selected{% endif %}>Low</option>
+                            <option value="Medium" {% if record.complexity == 'Medium' %}selected{% endif %}>Medium</option>
+                            <option value="High" {% if record.complexity == 'High' %}selected{% endif %}>High</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="form-control size" disabled>
+                            <option value="Small" {% if record.size == 'Small' %}selected{% endif %}>Small</option>
+                            <option value="Medium" {% if record.size == 'Medium' %}selected{% endif %}>Medium</option>
+                            <option value="Large" {% if record.size == 'Large' %}selected{% endif %}>Large</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="form-control task-type" disabled>
+                            <option value="Development" {% if record.task_type == 'Development' %}selected{% endif %}>Development</option>
+                            <option value="Testing" {% if record.task_type == 'Testing' %}selected{% endif %}>Testing</option>
+                            <option value="Documentation" {% if record.task_type == 'Documentation' %}selected{% endif %}>Documentation</option>
+                        </select>
+                    </td>
+                    <td><input type="number" class="form-control effort-hours" value="{{ record.estimated_effort_hours }}" disabled></td>
+                    <td>
+                        <select class="form-control confidence-level" disabled>
+                            <option value="Low" {% if record.confidence_level == 'Low' %}selected{% endif %}>Low</option>
+                            <option value="Medium" {% if record.confidence_level == 'Medium' %}selected{% endif %}>Medium</option>
+                            <option value="High" {% if record.confidence_level == 'High' %}selected{% endif %}>High</option>
+                        </select>
+                    </td>
+                    <td><input type="text" class="form-control range-hours" value="{{ record.estimated_range_hours }}" disabled></td>
+                    <td>
+                        <button type="button" class="btn btn-warning btn-sm edit-btn">Edit</button>
+                        <button type="button" class="btn btn-danger btn-sm delete-btn">Delete</button>
+                        <button type="button" class="btn btn-success btn-sm save-btn" style="display: none;">Save</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Edit button click event
+            $(".edit-btn").click(function() {
+                var row = $(this).closest("tr");
+                row.find(".form-control").prop("disabled", false);
+                row.find(".edit-btn").hide();
+                row.find(".save-btn").show();
+            });
+
+            // Save button click event
+            $(".save-btn").click(function() {
+                var row = $(this).closest("tr");
+                row.find(".form-control").prop("disabled", true);
+                row.find(".save-btn").hide();
+                row.find(".edit-btn").show();
+
+                var updatedData = {
+                    task_name: row.find(".task-name").val(),
+                    complexity: row.find(".complexity").val(),
+                    size: row.find(".size").val(),
+                    task_type: row.find(".task-type").val(),
+                    estimated_effort_hours: row.find(".effort-hours").val(),
+                    confidence_level: row.find(".confidence-level").val(),
+                    estimated_range_hours: row.find(".range-hours").val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/update_historical_data/" + row.attr("data-task-id"),
+                    contentType: "application/json",
+                    data: JSON.stringify(updatedData),
+                    success: function(response) {
+                        console.log(response.message);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Failed to update record:", error);
+                    }
+                });
+            });
+
+            // Delete button click event
+            $(".delete-btn").click(function() {
+                var row = $(this).closest("tr");
+                var taskId = row.attr("data-task-id");
+
+                if (confirm("Are you sure you want to delete this record?")) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/delete_historical_data/" + taskId,
+                        success: function(response) {
+                            console.log(response.message);
+                            row.remove();
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Failed to delete record:", error);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

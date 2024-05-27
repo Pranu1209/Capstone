@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Historical Data</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mt-5">Effort Estimation Tool</h1><br><br>
+        <h1>Create New Historical Data Record</h1>
+        <form action="{{ url_for('create_historical_data') }}" method="POST">
+            <a href="{{ url_for('dashboard') }}" class="btn btn-primary mb-3">HOME</a>
+            <div class="form-group">
+                <label for="task_name">Task Name</label>
+                <input type="text" class="form-control" id="task_name" name="task_name" required>
+            </div>
+            <div class="form-group">
+                <label for="complexity">Complexity</label>
+                <select class="form-control" id="complexity" name="complexity" required>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="size">Size</label>
+                <select class="form-control" id="size" name="size" required>
+                    <option value="Small">Small</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Large">Large</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="task_type">Task Type</label>
+                <select class="form-control" id="task_type" name="task_type" required>
+                    <option value="Development">Development</option>
+                    <option value="Testing">Testing</option>
+                    <option value="Documentation">Documentation</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="estimated_effort_hours">Estimated Effort Hours</label>
+                <input type="number" class="form-control" id="estimated_effort_hours" name="estimated_effort_hours" required>
+            </div>
+            <div class="form-group">
+                <label for="confidence_level">Confidence Level</label>
+                <select class="form-control" id="confidence_level" name="confidence_level" required>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="estimated_range_hours">Estimated Range Hours</label>
+                <input type="text" class="form-control" id="estimated_range_hours" name="estimated_range_hours" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Create Record</button>
+            <a href="{{ url_for('view_historical_data') }}" class="btn btn-secondary">View All Records</a>
+        </form>
+    </div>
+</body>
+</html>

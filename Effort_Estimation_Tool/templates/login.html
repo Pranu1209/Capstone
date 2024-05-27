@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Effort Estimation Tool - Login</title>
+    <link rel="stylesheet" href="../static/css/reg_log.css">
+    </head>
+<body>
+    <h1 class="text-center mt-5">Effort Estimation Tool</h1><br><br>
+    <h1>Login to Effort Estimation Tool</h1>
+    <form action="{{ url_for('login') }}" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required>
+        <br>
+
+        <!-- Display Error Message Inline -->
+        {% if error_message %}
+            <p style="color: red;">{{ error_message }}</p>
+        {% endif %}
+        
+        <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="/register">Register Here</a></p>
+    </body>
+</html>

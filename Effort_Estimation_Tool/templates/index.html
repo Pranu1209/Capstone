@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Effort Estimation Tool</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Effort Estimation Tool</h1>
+        <p>Estimate development effort with ease.</p>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Boost Your Development Efficiency</h2>
+            <p>This innovative tool helps you accurately estimate the time and resources required for your software development tasks. Gain valuable insights to plan effectively and optimize your project workflow.</p>
+            <a href="{{ url_for('register') }}" class="btn">SignUp For Get Started (Free)</a>
+        </section>
+
+        <section class="login">
+            <h3>Already Registered? Login Here</h3>
+            <form action="{{ url_for('login') }}" method="POST">
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" required>
+                <br>
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" required>
+                <br>
+                <button type="submit">Login</button>
+            </form>
+        </section>
+
+        <section class="features">
+            <div class="features-container">
+              <h3>Key Features</h3>
+              <ul>
+                <li><i class="fas fa-calculator"></i> Easy-to-use estimation process</li><br>
+                <li><i class="fas fa-chart-line"></i> Generate detailed effort reports</li><br>
+                <li><i class="fas fa-users"></i> Improve team collaboration and communication</li><br>
+                <li><i class="fas fa-clock"></i> Save time and resources by planning ahead</li>
+              </ul>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <h3>What Others Say</h3>
+            <div class="testimonial">
+                <p>"This tool has been a game-changer for our team. We can now estimate tasks with much greater accuracy, leading to better project planning and execution."</p>
+                <p>- Mr. XYZ, Software Development Lead</p>
+            </div>
+            <div class="testimonial">
+                <p>"Effort Estimation Tool has helped us improve our communication and collaboration with clients. We can now set realistic expectations and deliver projects on time and within budget."</p>
+                <p>- Mr. ABC, Project Manager</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Effort Estimation Tool</p>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit-code.js" crossorigin="anonymous"></script>
+    <script src="../static/js/script.js"></script>
+</body>
+</html>

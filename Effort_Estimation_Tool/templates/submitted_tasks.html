@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submitted Tasks</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mt-5">Effort Estimation Tool</h1><br><br>
+        <h1>Submitted Tasks</h1>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary mb-3">HOME</a> <a href="/submit_task" class="btn btn-primary mb-3">Submit Another Task</a><br><br>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Task ID</th>
+                    <th>Task Name</th>
+                    <th>Complexity</th>
+                    <th>Size</th>
+                    <th>Task Type</th>
+                    <th>Additional Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in submitted_tasks %}
+                <tr>
+                    <td>{{ task.task_id }}</td>
+                    <td>{{ task.task_name }}</td>
+                    <td>{{ task.complexity }}</td>
+                    <td>{{ task.size }}</td>
+                    <td>{{ task.task_type }}</td>
+                    <td>{{ task.additional_notes }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

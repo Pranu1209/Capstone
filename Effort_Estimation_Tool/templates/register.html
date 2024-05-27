@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Effort Estimation Tool - Register</title>
+    <link rel="stylesheet" href="../static/css/reg_log.css">
+    </head>
+<body>
+    <h1 class="text-center mt-5">Effort Estimation Tool</h1><br><br>
+    <h1>Register for Effort Estimation Tool</h1>
+    <form action="{{ url_for('register') }}" method="POST" onsubmit="return validateForm()">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" required>
+        <p id="username-error" style="color: red;"></p>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required>
+        <p id="password-error" style="color: red;"></p>
+
+        {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+        {% endif %}
+
+        <!-- Display Already Registered Message Inline -->
+        {% if already_registered_message %}
+            <p style="color: red;">{{ already_registered_message }}</p>
+        {% endif %}
+
+        <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="/login">Login Here</a></p>
+    <script src="../static/js/script.js"></script>
+    </body>
+</html>
