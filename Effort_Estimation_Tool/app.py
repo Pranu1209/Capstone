@@ -21,115 +21,6 @@ estimation_collection = db['estimations']
 historical_data_collection = db['historical_data']
 counters_collection = db['counters']
 
-
-# historical_data = [
-#     {
-#         "task_id": 1,
-#         "task_name": "Develop Login Module",
-#         "complexity": "Medium",
-#         "size": "Large",
-#         "task_type": "Development",
-#         "estimated_effort_hours": 40,
-#         "confidence_level": "Medium",
-#         "estimated_range_hours": "35-45"
-#     },
-#     {
-#         "task_id": 2,
-#         "task_name": "Implement Database Migration",
-#         "complexity": "High",
-#         "size": "Medium",
-#         "task_type": "Database",
-#         "estimated_effort_hours": 60,
-#         "confidence_level": "High",
-#         "estimated_range_hours": "55-60"
-#     },
-#     {
-#         "task_id": 3,
-#         "task_name": "Design User Interface",
-#         "complexity": "Low",
-#         "size": "Small",
-#         "task_type": "Design",
-#         "estimated_effort_hours": 20,
-#         "confidence_level": "Low",
-#         "estimated_range_hours": "18-22"
-#     },
-#     {
-#         "task_id": 4,
-#         "task_name": "Test Payment Gateway",
-#         "complexity": "High",
-#         "size": "Medium",
-#         "task_type": "Testing",
-#         "estimated_effort_hours": 30,
-#         "confidence_level": "Medium",
-#         "estimated_range_hours": "25-35"
-#     },
-#     {
-#         "task_id": 5,
-#         "task_name": "Perform Regression Testing",
-#         "complexity": "High",
-#         "size": "Large",
-#         "task_type": "Testing",
-#         "estimated_effort_hours": 50,
-#         "confidence_level": "High",
-#         "estimated_range_hours": "45-55"
-#     },
-#     {
-#         "task_id": 6,
-#         "task_name": "Optimize Queries for Performance",
-#         "complexity": "Medium",
-#         "size": "Large",
-#         "task_type": "Development",
-#         "estimated_effort_hours": 45,
-#         "confidence_level": "High",
-#         "estimated_range_hours": "40-50"
-#     },
-#     {
-#         "task_id": 7,
-#         "task_name": "Follow Material Design Guidelines",
-#         "complexity": "Low",
-#         "size": "Medium",
-#         "task_type": "Design",
-#         "estimated_effort_hours": 25,
-#         "confidence_level": "Low",
-#         "estimated_range_hours": "20-30"
-#     },
-#     {
-#         "task_id": 8,
-#         "task_name": "Refactor Legacy Code",
-#         "complexity": "High",
-#         "size": "Large",
-#         "task_type": "Development",
-#         "estimated_effort_hours": 70,
-#         "confidence_level": "Medium",
-#         "estimated_range_hours": "65-75"
-#     },
-#     {
-#         "task_id": 9,
-#         "task_name": "Write API Documentation",
-#         "complexity": "Low",
-#         "size": "Small",
-#         "task_type": "Development",
-#         "estimated_effort_hours": 15,
-#         "confidence_level": "Low",
-#         "estimated_range_hours": "12-18"
-#     },
-#     {
-#         "task_id": 10,
-#         "task_name": "Test Performance of Application",
-#         "complexity": "High",
-#         "size": "Large",
-#         "task_type": "Testing",
-#         "estimated_effort_hours": 55,
-#         "confidence_level": "High",
-#         "estimated_range_hours": "50-60"
-#     }
-# ]
-
-# # Insert historical data into MongoDB
-# historical_data_collection.insert_many(historical_data)
-# # historical_data_collection.delete_many({})
-# print("Historical data inserted successfully.")
-
 app = Flask(__name__)
 app.secret_key = secrets.token_bytes(32)  # Generate a secret key
 
@@ -182,14 +73,6 @@ def load_user(user_id):
   return User(user["_id"], user["username"], user["password_hash"]) if user else None
 
 
-# @app.route('/get_username',methods=['GET'])
-# def get_username():
-#     # Check if the username is stored in the session
-#     if 'username' in session:
-#         username = session['username']
-#         return jsonify({'username': username})
-#     else:
-#         return jsonify({'username': None})
 
 @app.route('/')
 def index():
