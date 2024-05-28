@@ -415,7 +415,9 @@ def calculate_estimation(current_user):
         confidence_level = "Medium"
     else:
         confidence_level = "Low"
-
+# It calculates the estimated range of effort hours based on the standard deviation 
+# of effort hours from similar tasks. If there's no variation (std_dev = 0), 
+# it assumes a default range of 10 hours above the estimated effort
     if std_dev > 0:
         lower_bound = max(0, estimated_effort - std_dev)
         upper_bound = estimated_effort + std_dev
