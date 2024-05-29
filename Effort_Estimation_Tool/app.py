@@ -34,8 +34,8 @@ login_manager.login_view = 'login'  # Redirect to login if unauthorized
 
 
 # Initialize the counters collection
-if counters_collection.find_one({"_id": "task_id"}) is None:
-    counters_collection.insert_one({"_id": "task_id", "task_id": 0})
+# if counters_collection.find_one({"_id": "task_id"}) is None:
+#     counters_collection.insert_one({"_id": "task_id", "task_id": 0})
 
 class User(UserMixin):
     def __init__(self,id,username,password_hash):
@@ -456,4 +456,4 @@ def calculate_estimation(current_user):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5010)
+    app.run(debug=True, port=5020)
